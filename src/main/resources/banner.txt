@@ -1,0 +1,11 @@
+
+  ,-----. ,-----.  ,-----. ,------. ,------.,------.   ,---.
+ '  .--./'  .-.  ''  .-.  '|  .--. '|  .---'|  .--. ' /    |
+ |  |    |  | |  ||  | |  ||  '--' ||  `--, |  '--'.'/  '  |
+ '  '--'\'  '-'  ''  '-'  '|  | --' |  `---.|  |\  \ '--|  |
+  `-----' `-----'  `-----' `--'     `------'`--' '--'   `--'
+
+Application Name    : Service-Eureka
+Application Version : 1.0.1
+Application Author  : Rally
+Spring Boot Version : ${spring-boot.version}${spring-boot.formatted-version}

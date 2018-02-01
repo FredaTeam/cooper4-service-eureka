@@ -1,0 +1,40 @@
+
+#如果为开发情况.注册中心为单一service.
+#Test 与Production情况下.请根据具体情况进行配置.
+spring:
+  profiles.active: development
+  pidfile: shared/tmp/pids/server-eureka.pid
+eureka:
+  environment: development
+  client:
+      registerWithEureka: false
+      fetchRegistry: false
+  server:
+      enableSelfPreservation: false
+      #eviction-interval-timer-in-ms: 4000
+      #waitTimeInMsWhenSyncEmpty: 0
+  instance:
+    hostname: localhost
+    preferIpAddress: true
+    metadataMap:
+      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+---
+spring:
+  profiles: test1
+
+---
+spring:
+  profiles: test2
+
+---
+spring:
+  profiles: test3
+---
+spring:
+  profiles: production1
+---
+spring:
+  profiles: production2
+---
+spring:
+  profiles: production3
