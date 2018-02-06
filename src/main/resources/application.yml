@@ -1,6 +1,8 @@
 
 #如果为开发情况.注册中心为单一service.
 #Test 与Production情况下.请根据具体情况进行配置.
+server:
+  port: 8761
 spring:
   profiles.active: development
   pidfile: shared/tmp/pids/server-eureka.pid
@@ -9,6 +11,8 @@ eureka:
   client:
       registerWithEureka: false
       fetchRegistry: false
+      serviceUrl:
+          defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   server:
       enableSelfPreservation: false
       #eviction-interval-timer-in-ms: 4000
@@ -21,14 +25,37 @@ eureka:
 ---
 spring:
   profiles: test1
-
+eureka:
+  instance:
+    hostname: test1
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://test2:8761/eureka/,http://test3:8761/eureka
 ---
 spring:
   profiles: test2
+eureka:
+  instance:
+    hostname: test2
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://test1:8761/eureka/,http://test3:8761/eureka
 
 ---
 spring:
   profiles: test3
+eureka:
+  instance:
+    hostname: test3
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://test1:8761/eureka/,http://test2:8761/eureka
 ---
 spring:
   profiles: production1
