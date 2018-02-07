@@ -5,7 +5,8 @@ server:
   port: 8761
 spring:
   profiles.active: development
-  pidfile: shared/tmp/pids/server-eureka.pid
+  pid:
+    file: shared/tmp/pids/server-eureka.pid
 eureka:
   environment: development
   client:
