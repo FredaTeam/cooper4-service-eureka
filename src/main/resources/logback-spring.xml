@@ -30,7 +30,7 @@
 
 
     <root level="INFO">
-        <springProfile name="development">
+        <springProfile name="dev">
             <appender-ref ref="stdout"/>
         </springProfile>
 

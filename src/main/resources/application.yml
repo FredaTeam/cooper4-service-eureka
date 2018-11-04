@@ -1,14 +1,12 @@
-
 #如果为开发情况.注册中心为单一service.
 #Test 与Production情况下.请根据具体情况进行配置.
 server:
   port: 8761
 spring:
-  profiles.active: development
+  profiles.active: dev
   pid:
     file: shared/tmp/pids/server-eureka.pid
 eureka:
-  environment: development
   client:
     # 注册自身到eureka服务器
     registerWithEureka: false
@@ -28,8 +26,8 @@ eureka:
     enable-self-preservation: false
     # Eureka Server 自我保护系数，当enable-self-preservation=true时，启作用
     # renewal-percent-threshold:
-    # 设置清理间隔,单位为毫秒,默认为0
-    eviction-interval-timer-in-ms: 3000
+    # 设置清理间隔,单位为毫秒,默认为60000
+    eviction-interval-timer-in-ms: 60000
     # 设置如果Eureka Server启动时无法从临近Eureka Server节点获取注册信息，它多久不对外提供注册服务
     wait-time-in-ms-when-sync-empty: 6000000
     # 集群之间相互更新节点信息的时间频率
@@ -43,6 +41,12 @@ eureka:
     lease-expiration-duration-in-seconds: 7
     metadataMap:
       instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+security:
+  basic:
+    enabled: true
+  user:
+    name: cooper
+    password: cooper
 ---
 spring:
   profiles: test1
