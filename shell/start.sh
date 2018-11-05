@@ -6,7 +6,7 @@ SERVER_NAME=$1
 
 if [ -z ${SERVER_NAME} ]; then
       echo 'please input server name'
-      exit
+      exit 2
 fi
 
 # 生产环境JVM参数配置
