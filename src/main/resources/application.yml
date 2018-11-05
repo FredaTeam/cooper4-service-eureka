@@ -18,7 +18,7 @@ eureka:
     registry-fetch-interval-seconds: 5
     # 设置eureka服务器所在的地址，查询服务和注册服务都需要依赖这个地址
     serviceUrl:
-      defaultZone: http://127.0.0.1:${server.port}/eureka/
+      defaultZone: http://localhost:${server.port}/eureka/
     # 设置eureka服务器所在的地址，可以同时向多个服务注册服务
     # defaultZone: http://192.168.21.3:10761/eureka/,http://192.168.21.4:10761/eureka/
   server:
