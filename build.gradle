@@ -6,7 +6,7 @@ allprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'spring-boot'
-    apply plugin: 'io.spring.dependency-management'
+//    apply plugin: 'io.spring.dependency-management'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -17,12 +17,12 @@ buildscript {
         springBootVersion = '1.5.9.RELEASE'
     }
     repositories {
-        mavenCentral()
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath 'io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE'
+//        classpath 'io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE'
     }
 }
 
@@ -38,8 +38,8 @@ dependencyManagement {
 }
 
 repositories {
-    mavenCentral()
     maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    mavenCentral()
 }
 
 dependencies {
@@ -47,7 +47,4 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-security'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile "junit:junit"
-}
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.9'
 }
