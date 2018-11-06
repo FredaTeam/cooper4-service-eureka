@@ -2,12 +2,14 @@
 
 set -e
 
-SERVER_NAME=$1
+SERVER_PATH=$1
 
-if [ -z ${SERVER_NAME} ]; then
-      echo 'please input server name'
+if [ -z ${SERVER_PATH} ]; then
+      echo 'please input server path'
       exit 2
 fi
+
+SERVER_NAME=${SERVER_PATH##*/}
 
 # 生产环境JVM参数配置
 CUSTOM_JVM_ONLINE=" -Xmx512m
@@ -23,9 +25,9 @@ CUSTOM_JVM_ONLINE=" -Xmx512m
              -Dspring.profiles.active=dev"
 
 
-CUSTOM_LOG_PATH_ONLINE="~/cooper/logs"
+CUSTOM_LOG_PATH_ONLINE="/home/logs"
 
-DEFAULT_LOG_PATH="~/cooper/logs"
+DEFAULT_LOG_PATH="/home/logs"
 
 # 指定默认日志路径
 if [ -z ${LOG_PATH} ]; then
@@ -71,13 +73,11 @@ function run() {
     fi
 
     # 环境设置 ${DEFAULT_JVM}
-    CUSTOM_JVM="${CUSTOM_JVM_ONLINE}"
-    # 指定LOG_PATH为线上路径
-    LOG_PATH="${CUSTOM_LOG_PATH_ONLINE}"
-#    ln -s ${CUSTOM_LOG_PATH_ONLINE} logs
+    CUSTOM_JVM="${CUSTOM_JVM_ONLINE} ${DEFAULT_JVM}"
+    ln -s ${CUSTOM_LOG_PATH_ONLINE} ${SERVER_PATH}/logs
 
 
-    nohup java ${CUSTOM_JVM} -jar ${SERVER_NAME}.jar  > output.log 2>&1 &
+    exec java ${CUSTOM_JVM} -jar ${SERVER_PATH}.jar  > ${SERVER_PATH}/startup.log 2>&1 &
 
     echo run finished
 }

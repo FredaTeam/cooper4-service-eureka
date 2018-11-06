@@ -50,18 +50,18 @@ dependencies {
     testCompile "junit:junit"
 }
 
-publishing {
-    publications {
-        myPublication(MavenPublication) {
-            // telling gradle to publish project's jar archive (2)
-            from components.java
-        }
-    }
-    // telling gradle to publish artifact to local directory (3)
-    repositories {
-        maven {
-            url "file:/${project.projectDir}/artifacts"
-        }
-    }
-}
+//publishing {
+//    publications {
+//        myPublication(MavenPublication) {
+//            // telling gradle to publish project's jar archive (2)
+//            from components.java
+//        }
+//    }
+//    // telling gradle to publish artifact to local directory (3)
+//    repositories {
+//        maven {
+//            url "file:/${project.projectDir}/artifacts"
+//        }
+//    }
+//}
 
