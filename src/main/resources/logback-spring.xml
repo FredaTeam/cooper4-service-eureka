@@ -3,7 +3,7 @@
 
     <timestamp key="today" datePattern="yyyy-MM-dd"/>
     <property name="project" value="server-eureka"/>
-    <property name="log_dir" value="logs"/>
+    <property name="log_dir" value="/home/work/eureka/common/logs"/>
 
 
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">

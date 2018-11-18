@@ -20,14 +20,14 @@ CUSTOM_JVM_ONLINE=" -Xmx512m
              -XX:MaxMetaspaceSize=64m
              -XX:+UseConcMarkSweepGC
              -XX:+UseParNewGC
-             -XX:+PrintGCDetails
-             -XX:+PrintGCDateStamps
-             -Dspring.profiles.active=dev"
+             -XX:+ScavengeBeforeFullGC
+             -XX:+CMSScavengeBeforeRemark
+	     -Dspring.profiles.active=dev"
 
 
 CUSTOM_LOG_PATH_ONLINE="/home/logs"
 
-DEFAULT_LOG_PATH="/home/logs"
+DEFAULT_LOG_PATH="${SERVER_PATH}/logs"
 
 # 指定默认日志路径
 if [ -z ${LOG_PATH} ]; then
@@ -41,7 +41,10 @@ DEFAULT_JVM=" -Xloggc:$LOG_PATH/$SERVER_NAME.gc.log.`date +%Y%m%d%H%M`
               -XX:HeapDumpPath=$LOG_PATH/$SERVER_NAME.heaperr.log.`date +%Y%m%d%H%M`
               -XX:+HeapDumpOnOutOfMemoryError
               -XX:+PrintGCDetails
-              -XX:+PrintGCDateStamps"
+	      -XX:+UseGCLogFileRotation
+              -XX:NumberOfGCLogFiles=10
+              -XX:GCLogFileSize=100M
+              -XX:+PrintGCDateStamps -verbose:gc"
 
 function init() {
     echo ${SERVER_NAME}
@@ -67,17 +70,18 @@ function init() {
 function run() {
     echo starting...
 
-    if [ -d "logs" ]; then
-        echo rm logs
-        rm -rf logs
+    if [ ! -d ${LOG_PATH} ];then
+      mkdir ${LOG_PATH}
+    else
+      echo ${LOG_PATH} exist
     fi
 
     # 环境设置 ${DEFAULT_JVM}
     CUSTOM_JVM="${CUSTOM_JVM_ONLINE} ${DEFAULT_JVM}"
-    ln -s ${CUSTOM_LOG_PATH_ONLINE} ${SERVER_PATH}/logs
+    # ln -s ${CUSTOM_LOG_PATH_ONLINE} ${SERVER_PATH}/logs
 
 
-    exec java ${CUSTOM_JVM} -jar ${SERVER_PATH}.jar  > ${SERVER_PATH}/startup.log 2>&1 &
+    exec /home/java/bin/java ${CUSTOM_JVM} -jar ${SERVER_PATH}.jar  > ${SERVER_PATH}/startup.log 2>&1 &
 
     echo run finished
 }
