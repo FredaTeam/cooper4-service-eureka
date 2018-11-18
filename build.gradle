@@ -1,13 +1,12 @@
 allprojects {
 
-    group = 'org.freda.cooer4'
+    group = 'org.freda.cooper4'
     version = '1.0.1'
 
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'spring-boot'
     apply plugin: 'maven-publish'
-//    apply plugin: 'io.spring.dependency-management'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -23,7 +22,6 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-//        classpath 'io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE'
     }
 }
 
